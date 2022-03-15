@@ -1,11 +1,11 @@
-import {Header}  from './componentes/Header'
+import { Header } from '../src/componentes/Header'
 import {GlobalStyle} from './styles/global'
 
 
 export function App() {
   return (
     <>
-      <Header/>
+     <Header/>
       <GlobalStyle/>
     </>
   )
