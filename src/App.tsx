@@ -1,4 +1,4 @@
-import { Header } from '../src/componentes/Header'
+import {Header} from './components/Header'
 import {GlobalStyle} from './styles/global'
 
 
