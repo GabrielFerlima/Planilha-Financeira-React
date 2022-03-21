@@ -1,6 +1,6 @@
 import {Dashboard} from './components/Dashboard'
 import {Header} from './components/Header'
-import {TransactionsContext} from './TransactionsContext'
+import {TransactionsContext, TransactionsProvider} from './TransactionsContext'
 import {GlobalStyle} from './styles/global'
 import {NewTransactionModal} from './components/NewTransactionModal'
 import Modal from 'react-modal'
@@ -24,7 +24,7 @@ export function App() {
   }
 
   return (
-    <TransactionsContext.Provider value={[]}>
+    <TransactionsProvider>
      <Header onOpenNewTransactionModal={handleOpenNewTransactionModal}/>
      <Dashboard/>
 
@@ -32,6 +32,6 @@ export function App() {
      onRequestClose={handleCloseNewTransactionModal}/>
      
       <GlobalStyle/>
-    </TransactionsContext.Provider>
+    </TransactionsProvider>
   )
 }
