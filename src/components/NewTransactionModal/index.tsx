@@ -1,10 +1,11 @@
 import Modal from "react-modal";
-import {useState, useEffect, FormEvent} from 'react'
+import {useState, useEffect, FormEvent, useContext} from 'react'
 import {Container, TransactionTypeContainer, Radiobox} from './styles'
 import closeImg from '../../assets/close.svg'
 import incomeImg from '../../assets/income.svg'
 import outcomeImg from '../../assets/outcome.svg'
 import {api} from '../../services/api'
+import {TransactionsContext} from '../../TransactionsContext'
 
 
 interface NewTransactionModalProbs {
@@ -14,8 +15,10 @@ interface NewTransactionModalProbs {
 
 
 export function NewTransactionModal({isOpen, onRequestClose}: NewTransactionModalProbs) {
+    const { createTransaction } = useContext(TransactionsContext);
+
     const [title, setTitle] = useState('');
-    const [value, setValue] = useState(0);
+    const [amount, setAmount] = useState(0);
     const [category, setCategory] = useState('')
    
     const [type, setType] = useState('deposit');
@@ -23,12 +26,14 @@ export function NewTransactionModal({isOpen, onRequestClose}: NewTransactionModa
     function handleCreateNewTransaction(event: FormEvent) {
         event.preventDefault();
 
-        const data = ({
+        createTransaction({
             title, 
-            value, 
-            category
+            amount, 
+             category,
+             type,
+
         })
-        api.post('transactions', data)
+        
     }
 
     return (
@@ -51,8 +56,8 @@ export function NewTransactionModal({isOpen, onRequestClose}: NewTransactionModa
                 onChange={event => setTitle(event.target.value)} />
 
                 <input type="number" placeholder="Valor" 
-                value={value} 
-                onChange={event => setValue(+event.target.value)}
+                value={amount} 
+                onChange={event => setAmount(+event.target.value)}
                 />
 
                 <TransactionTypeContainer> 
@@ -91,4 +96,8 @@ export function NewTransactionModal({isOpen, onRequestClose}: NewTransactionModa
             </Container>
             </Modal>
     )
+}
+
+function transactionsContext(transactionsContext: any) {
+    throw new Error("Function not implemented.");
 }

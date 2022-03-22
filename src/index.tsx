@@ -7,7 +7,7 @@ import {createServer, Model} from 'miragejs'
 createServer({
   
   models: {
-    transaction: Model
+    transaction: Model,
   },
 
   seeds(server) {
